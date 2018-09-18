@@ -62,4 +62,12 @@ class GameScene: SKScene {
             strip.position.y -= 30
         })
     }
+    
+    func removeItems() {
+        for child in children {
+            if child.position.y < -self.size.height - 100 {
+                child.removeFromParent()
+            }
+        }
+    }
 }
