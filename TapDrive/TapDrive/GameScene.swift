@@ -37,6 +37,9 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if canMove {
+            move(leftSide : leftCarToMoveLeft)
+        }
         showRoadStrip()
     }
     
@@ -108,6 +111,20 @@ class GameScene: SKScene {
         for child in children {
             if child.position.y < -self.size.height - 100 {
                 child.removeFromParent()
+            }
+        }
+    }
+    
+    func move(leftSide : Bool) {
+        if leftSide {
+            leftCar.position.x -= 20
+            if leftCar.position.x < leftCarMinimumX {
+                leftCar.position.x = leftCarMinimumX
+            }
+        } else {
+            leftCar.position.x += 20
+            if leftCar.position.x > leftCarMaximumX {
+                leftCar.position.x = leftCarMaximumX
             }
         }
     }
