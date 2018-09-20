@@ -14,6 +14,13 @@ class GameScene: SKScene {
     var leftCar = SKSpriteNode()
     var rightCar = SKSpriteNode()
     
+    var canMove = false
+    var leftCarToMoveLeft = true
+    var rightCarToMoveRight = true
+    
+    var leftCarAtRight = false
+    var rightCarAtLeft = false
+    
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         setUp()
