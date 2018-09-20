@@ -15,11 +15,20 @@ class GameScene: SKScene {
     var rightCar = SKSpriteNode()
     
     var canMove = false
+    
     var leftCarToMoveLeft = true
     var rightCarToMoveRight = true
     
     var leftCarAtRight = false
     var rightCarAtLeft = false
+    
+    var centerPoint : CGFloat!
+    
+    let leftCarMinimumX : CGFloat = -280
+    let leftCarMaximumX : CGFloat = -100
+    
+    let rightCarMinimumX : CGFloat = 100
+    let rightCarMaximumX : CGFloat = 280
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -31,9 +40,34 @@ class GameScene: SKScene {
         showRoadStrip()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let touchLocation = touch.location(in: self)
+            if touchLocation.x > centerPoint {
+                if rightCarAtLeft {
+                    rightCarAtLeft = false
+                    rightCarToMoveRight = true
+                } else {
+                    rightCarAtLeft = true
+                    rightCarToMoveRight = false
+                }
+            } else {
+                if leftCarAtRight {
+                    leftCarAtRight = false
+                    leftCarToMoveLeft = true
+                } else {
+                    leftCarAtRight = true
+                    leftCarToMoveLeft = false
+                }
+            }
+            canMove = true
+        }
+    }
+    
     func setUp() {
         leftCar = self.childNode(withName: "leftCar") as! SKSpriteNode
         rightCar = self.childNode(withName: "rightCar") as! SKSpriteNode
+        centerPoint = self.frame.size.width / self.frame.size.height
     }
     
     @objc func createRoadStrip() {
