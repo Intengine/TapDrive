@@ -14,6 +14,7 @@
 		8724D8FA21494118001B2D33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8724D8F821494118001B2D33 /* Main.storyboard */; };
 		8724D8FC21494119001B2D33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8724D8FB21494119001B2D33 /* Assets.xcassets */; };
 		8724D8FF21494119001B2D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8724D8FD21494119001B2D33 /* LaunchScreen.storyboard */; };
+		87A3B47F2155233000EE1616 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A3B47E2155233000EE1616 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8724D8FB21494119001B2D33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8724D8FE21494119001B2D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8724D90021494119001B2D33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87A3B47E2155233000EE1616 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				8724D8F021494118001B2D33 /* GameScene.sks */,
 				8724D8F421494118001B2D33 /* GameScene.swift */,
 				8724D8F621494118001B2D33 /* GameViewController.swift */,
+				87A3B47E2155233000EE1616 /* Helper.swift */,
 				8724D8F821494118001B2D33 /* Main.storyboard */,
 				8724D8FB21494119001B2D33 /* Assets.xcassets */,
 				8724D8FD21494119001B2D33 /* LaunchScreen.storyboard */,
@@ -146,6 +149,7 @@
 				8724D8F521494118001B2D33 /* GameScene.swift in Sources */,
 				8724D8F721494118001B2D33 /* GameViewController.swift in Sources */,
 				8724D8EF21494118001B2D33 /* AppDelegate.swift in Sources */,
+				87A3B47F2155233000EE1616 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
