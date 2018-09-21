@@ -34,6 +34,7 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         setUp()
         Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(GameScene.createRoadStrip), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.leftTraffic), userInfo: nil, repeats: true)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -142,5 +143,38 @@ class GameScene: SKScene {
                 rightCar.position.x = rightCarMaximumX
             }
         }
+    }
+    
+    @objc func leftTraffic() {
+        let leftTrafficItem : SKSpriteNode!
+        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 8)
+        switch Int(randomNumber) {
+        case 1...4:
+            leftTrafficItem = SKSpriteNode(imageNamed: "redCar")
+            leftTrafficItem.name = "redCar"
+            break
+        case 5...8:
+            leftTrafficItem = SKSpriteNode(imageNamed: "greenCar")
+            leftTrafficItem.name = "greenCar"
+            break
+        default:
+            leftTrafficItem = SKSpriteNode(imageNamed: "redCar")
+            leftTrafficItem.name = "redCar"
+        }
+        leftTrafficItem.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        leftTrafficItem.zPosition = 10
+        
+        let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
+        switch Int(randomNum) {
+        case 1...4:
+            leftTrafficItem.position.x = -280
+            break
+        case 5...10:
+            leftTrafficItem.position.x = -100
+            break
+        default:
+            leftTrafficItem.position.x = -280
+        }
+        addChild(leftTrafficItem)
     }
 }
