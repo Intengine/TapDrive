@@ -35,6 +35,7 @@ class GameScene: SKScene {
         setUp()
         Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(GameScene.createRoadStrip), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.leftTraffic), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.rightTraffic), userInfo: nil, repeats: true)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -187,5 +188,39 @@ class GameScene: SKScene {
         }
         leftTrafficItem.position.y = 700
         addChild(leftTrafficItem)
+    }
+    
+    @objc func rightTraffic() {
+        let rightTrafficItem : SKSpriteNode!
+        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 8)
+        switch Int(randomNumber) {
+        case 1...4:
+            rightTrafficItem = SKSpriteNode(imageNamed: "redCar")
+            rightTrafficItem.name = "redCar"
+            break
+        case 5...8:
+            rightTrafficItem = SKSpriteNode(imageNamed: "greenCar")
+            rightTrafficItem.name = "greenCar"
+            break
+        default:
+            rightTrafficItem = SKSpriteNode(imageNamed: "redCar")
+            rightTrafficItem.name = "redCar"
+        }
+        rightTrafficItem.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        rightTrafficItem.zPosition = 10
+        
+        let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
+        switch Int(randomNum) {
+        case 1...4:
+            rightTrafficItem.position.x = -280
+            break
+        case 5...10:
+            rightTrafficItem.position.x = -100
+            break
+        default:
+            rightTrafficItem.position.x = -280
+        }
+        rightTrafficItem.position.y = 700
+        addChild(rightTrafficItem)
     }
 }
