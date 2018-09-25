@@ -107,6 +107,16 @@ class GameScene: SKScene {
             let strip = roadStrip as! SKShapeNode
             strip.position.y -= 30
         })
+        
+        enumerateChildNodes(withName: "redCar", using: {(leftCar, stop) in
+            let car = leftCar as! SKSpriteNode
+            car.position.y -= 30
+        })
+        
+        enumerateChildNodes(withName: "greenCar", using: {(rightCar, stop) in
+            let car = rightCar as! SKSpriteNode
+            car.position.y -= 30
+        })
     }
     
     func removeItems() {
@@ -175,6 +185,7 @@ class GameScene: SKScene {
         default:
             leftTrafficItem.position.x = -280
         }
+        leftTrafficItem.position.y = 700
         addChild(leftTrafficItem)
     }
 }
