@@ -212,13 +212,13 @@ class GameScene: SKScene {
         let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
         switch Int(randomNum) {
         case 1...4:
-            rightTrafficItem.position.x = -280
+            rightTrafficItem.position.x = 280
             break
         case 5...10:
-            rightTrafficItem.position.x = -100
+            rightTrafficItem.position.x = 100
             break
         default:
-            rightTrafficItem.position.x = -280
+            rightTrafficItem.position.x = 280
         }
         rightTrafficItem.position.y = 700
         addChild(rightTrafficItem)
