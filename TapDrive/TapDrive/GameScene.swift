@@ -47,6 +47,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         showRoadStrip()
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody = SKPhysicsBody()
+        var secondBody = SKPhysicsBody()
+        
+        if contact.bodyA.node?.name == "leftCar" || contact.bodyA.node?.name == "rightCar" {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self)
@@ -198,6 +211,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         leftTrafficItem.position.y = 700
         leftTrafficItem.physicsBody = SKPhysicsBody(circleOfRadius: leftTrafficItem.size.height / 2)
         leftTrafficItem.physicsBody?.categoryBitMask = ColliderType.ITEM_COLLIDER
+        leftTrafficItem.physicsBody?.collisionBitMask = 0
+        leftTrafficItem.physicsBody?.affectedByGravity = false
         addChild(leftTrafficItem)
     }
     
@@ -232,6 +247,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             rightTrafficItem.position.x = 280
         }
         rightTrafficItem.position.y = 700
+        rightTrafficItem.physicsBody = SKPhysicsBody(circleOfRadius: rightTrafficItem.size.height / 2)
+        rightTrafficItem.physicsBody?.categoryBitMask = ColliderType.ITEM_COLLIDER_1
+        rightTrafficItem.physicsBody?.collisionBitMask = 0
+        rightTrafficItem.physicsBody?.affectedByGravity = false
         addChild(rightTrafficItem)
     }
 }
