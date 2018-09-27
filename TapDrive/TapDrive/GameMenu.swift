@@ -7,3 +7,14 @@
 //
 
 import Foundation
+import SpriteKit
+
+class GameMenu: SKScene {
+    
+    var startGame = SKLabelNode()
+    
+    override func didMove(to view: SKView) {
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        startGame = self.childNode(withName: "startGame") as! SKLabelNode
+    }
+}

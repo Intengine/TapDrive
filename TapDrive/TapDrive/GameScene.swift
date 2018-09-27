@@ -60,6 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         firstBody.node?.removeFromParent()
+        afterCollision()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -254,5 +255,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightTrafficItem.physicsBody?.collisionBitMask = 0
         rightTrafficItem.physicsBody?.affectedByGravity = false
         addChild(rightTrafficItem)
+    }
+    
+    func afterCollision() {
+        let menuScene = SKScene(fileNamed: "GameMenu")
+        menuScene?.scaleMode = .aspectFill
+        view?.presentScene(menuScene!, transition: SKTransition.doorsCloseHorizontal(withDuration: TimeInterval(2)))
     }
 }
