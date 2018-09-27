@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var countDown = 1
     var stopEverything = true // obviously
+    var scoreText = SKLabelNode()
     
     let leftCarMinimumX : CGFloat = -280
     let leftCarMaximumX : CGFloat = -100
@@ -104,6 +105,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightCar.physicsBody?.categoryBitMask = ColliderType.CAR_COLLIDER
         rightCar.physicsBody?.contactTestBitMask = ColliderType.ITEM_COLLIDER_1
         rightCar.physicsBody?.collisionBitMask = 0
+        
+        // background for score
+        let score = SKShapeNode(rect: CGRect(x: -self.size.width / 2 + 70, y: self.size.height / 2 - 130, width: 180, height: 80), cornerRadius: 20)
+        score.zPosition = 4
+        score.fillColor = SKColor.black.withAlphaComponent(0.3)
+        score.strokeColor = SKColor.black.withAlphaComponent(0.3)
+        addChild(score)
+        
+        // text for score
+        scoreText.name = "score"
+        scoreText.fontName = "Helvetica Neue Bold"
+        scoreText.text = "0"
+        scoreText.fontColor = SKColor.white
+        scoreText.position = CGPoint(x: -self.size.width / 2 + 160, y: self.size.height / 2 - 110)
+        scoreText.fontSize = 50
+        scoreText.zPosition = 4
+        addChild(scoreText)
     }
     
     @objc func createRoadStrip() {
