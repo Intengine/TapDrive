@@ -29,6 +29,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var stopEverything = true // obviously
     var scoreText = SKLabelNode()
     
+    var gameSettings = Settings.sharedInstance
+    
     let leftCarMinimumX : CGFloat = -280
     let leftCarMaximumX : CGFloat = -100
     
@@ -42,9 +44,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(GameScene.createRoadStrip), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.startCountDown), userInfo: nil, repeats: true)
         
-        Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.leftTraffic), userInfo: nil, repeats: true)
-        Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.rightTraffic), userInfo: nil, repeats: true)
-        Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.removeItems), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0.8, secondNumber: 1.8)), target: self, selector: #selector(GameScene.leftTraffic), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0.8, secondNumber: 1.8)), target: self, selector: #selector(GameScene.rightTraffic), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(GameScene.removeItems), userInfo: nil, repeats: true)
         
         let deadTime = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: deadTime) {
@@ -289,6 +291,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func afterCollision() {
+        if gameSettings.highScore < score {
+            gameSettings.highScore = score
+        }
         let menuScene = SKScene(fileNamed: "GameMenu")
         menuScene?.scaleMode = .aspectFill
         view?.presentScene(menuScene!, transition: SKTransition.doorsCloseHorizontal(withDuration: TimeInterval(2)))
