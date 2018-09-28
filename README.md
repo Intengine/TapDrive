@@ -1,2 +1,2 @@
 # TapDrive
-Driving 2D game for iOS [WIP]
+Driving 2D game for iOS
