@@ -23,6 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var rightCarAtLeft = false
     
     var centerPoint : CGFloat!
+    var score = 0
     
     var countDown = 1
     var stopEverything = true // obviously
@@ -44,6 +45,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.leftTraffic), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0, secondNumber: 1.8)), target: self, selector: #selector(GameScene.rightTraffic), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.removeItems), userInfo: nil, repeats: true)
+        
+        let deadTime = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: deadTime) {
+            Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -105,15 +111,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightCar.physicsBody?.categoryBitMask = ColliderType.CAR_COLLIDER
         rightCar.physicsBody?.contactTestBitMask = ColliderType.ITEM_COLLIDER_1
         rightCar.physicsBody?.collisionBitMask = 0
-        
-        // background for score
-        let score = SKShapeNode(rect: CGRect(x: -self.size.width / 2 + 70, y: self.size.height / 2 - 130, width: 180, height: 80), cornerRadius: 20)
-        score.zPosition = 4
-        score.fillColor = SKColor.black.withAlphaComponent(0.3)
-        score.strokeColor = SKColor.black.withAlphaComponent(0.3)
-        addChild(score)
-        
-        // text for score
+
+        let scorePanel = SKShapeNode(rect: CGRect(x: -self.size.width / 2 + 70, y: self.size.height / 2 - 130, width: 180, height: 80), cornerRadius: 20)
+        scorePanel.zPosition = 4
+        scorePanel.fillColor = SKColor.black.withAlphaComponent(0.3)
+        scorePanel.strokeColor = SKColor.black.withAlphaComponent(0.3)
+        addChild(scorePanel)
+
         scoreText.name = "score"
         scoreText.fontName = "Helvetica Neue Bold"
         scoreText.text = "0"
@@ -159,12 +163,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         enumerateChildNodes(withName: "redCar", using: {(leftCar, stop) in
             let car = leftCar as! SKSpriteNode
-            car.position.y -= 30
+            car.position.y -= 15
         })
         
         enumerateChildNodes(withName: "greenCar", using: {(rightCar, stop) in
             let car = rightCar as! SKSpriteNode
-            car.position.y -= 30
+            car.position.y -= 15
         })
     }
     
@@ -313,6 +317,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if countDown == 4 {
                 self.stopEverything = false
             }
+        }
+    }
+    
+    @objc func increaseScore() {
+        if !stopEverything {
+            score += 1
+            scoreText.text = String(score)
         }
     }
 }
